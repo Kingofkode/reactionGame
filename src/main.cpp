@@ -1,3 +1,4 @@
+// Delete this when you open with Arduino IDE
 #include <Arduino.h>
 
 int bulbPin = 12;
