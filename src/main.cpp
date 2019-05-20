@@ -3,6 +3,11 @@
 int bulbPin = 12;
 int greenButtonPin = A5;
 int yellowButtonPin = A0;
+// Adjust with each rewire
+int analogThreshold = 670;
+// 3 sec to 5 sec
+int randomTime = random(3000, 5000);
+bool isLightOn = false;
 
 void setup() {
   Serial.begin(9600);
@@ -12,22 +17,28 @@ void setup() {
   pinMode(greenButtonPin, INPUT);
   pinMode(yellowButtonPin, INPUT);
 
-  digitalWrite(bulbPin, LOW);
 }
 
 void loop() {
   // Green Button
   int greenButtonValue = analogRead(greenButtonPin);
-  if (greenButtonValue > 1000) {
-    digitalWrite(bulbPin, HIGH);
-  }else{
-    digitalWrite(bulbPin, LOW);
-  }
-  // Yellow Button
-  int yellowButtonValue = analogRead(yellowButtonPin);
-  if (yellowButtonValue > 1000) {
-    digitalWrite(bulbPin, HIGH);
-  }else{
-    digitalWrite(bulbPin, LOW);
-  }
+  Serial.println(greenButtonValue);
+  // if (greenButtonValue > analogThreshold) {
+  //   digitalWrite(bulbPin, HIGH);
+  // }else{
+  //   digitalWrite(bulbPin, LOW);
+  // }
+  // // Yellow Button
+  // int yellowButtonValue = analogRead(yellowButtonPin);
+  // if (yellowButtonValue > analogThreshold) {
+  //   digitalWrite(bulbPin, HIGH);
+  // }else{
+  //   digitalWrite(bulbPin, LOW);
+  // }
+}
+
+void startTimer() {
+  delay(randomTime);
+  digitalWrite(bulbPin, HIGH);
+  isLightOn = true;
 }
